@@ -110,7 +110,7 @@
 <body class="antialiased overflow-x-hidden selection:bg-bpm-green-700 selection:text-white bg-bpm-green-900">
 
     <!-- Wrapper Utama dengan background hero -->
-    <div class="relative min-h-screen bg-hero">
+    <div id="beranda" class="relative min-h-screen bg-hero">
         
         <!-- Overlay gelap terkonsentrasi di sisi teks; foto pengurus di kanan tetap terlihat jelas. -->
         <div aria-hidden="true" class="absolute inset-0 z-0 bg-gradient-to-r from-emerald-950/85 via-emerald-950/45 to-transparent"></div>
@@ -124,12 +124,12 @@
 
             <!-- Menu di Tengah -->
             <nav class="hidden md:flex w-2/4 justify-center">
-                <ul class="flex space-x-8 text-sm font-medium tracking-wide text-white">
-                    <li><a href="#" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Beranda</a></li>
-                    <li><a href="#profil" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Profil</a></li>
-                    <li><a href="#proker" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Program Kerja</a></li>
-                    <li><a href="#berita" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Berita</a></li>
-                    <li><a href="#connect" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Connect with Us</a></li>
+                <ul class="flex items-center gap-1 text-sm tracking-wide xl:gap-2">
+                    <li><a href="#beranda" data-nav-link data-nav-target="beranda" aria-current="location" class="inline-flex whitespace-nowrap rounded-xl border border-white/30 bg-white/20 px-4 py-2 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Beranda</a></li>
+                    <li><a href="#profil" data-nav-link data-nav-target="profil" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Profil</a></li>
+                    <li><a href="#proker" data-nav-link data-nav-target="proker" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Program Kerja</a></li>
+                    <li><a href="#berita" data-nav-link data-nav-target="berita" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Berita</a></li>
+                    <li><a href="#connect" data-nav-link data-nav-target="connect" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Connect with Us</a></li>
                 </ul>
             </nav>
 
@@ -157,7 +157,7 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" aria-hidden="true" class="hidden md:hidden fixed left-6 right-6 top-20 z-40 rounded-xl border border-emerald-400/20 bg-emerald-950/95 p-4 shadow-2xl backdrop-blur-md">
             <ul class="flex flex-col space-y-4 text-white text-center font-medium">
-                <li><a href="#" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Beranda</a></li>
+                <li><a href="#beranda" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Beranda</a></li>
                 <li><a href="#profil" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Profil</a></li>
                 <li><a href="#proker" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Program Kerja</a></li>
                 <li><a href="#berita" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Berita</a></li>
@@ -521,6 +521,32 @@
             };
             syncNavbar();
             window.addEventListener('scroll', syncNavbar, { passive: true });
+
+            const navLinks = [...document.querySelectorAll('[data-nav-link]')];
+            const navSections = ['beranda', 'profil', 'proker', 'berita', 'connect']
+                .map((id) => document.getElementById(id))
+                .filter(Boolean);
+            const setActiveNav = (target) => {
+                navLinks.forEach((link) => {
+                    const active = link.dataset.navTarget === target;
+                    link.classList.toggle('bg-white/20', active);
+                    link.classList.toggle('border-white/30', active);
+                    link.classList.toggle('text-white', active);
+                    link.classList.toggle('font-semibold', active);
+                    link.classList.toggle('text-white/90', !active);
+                    link.classList.toggle('font-medium', !active);
+                    if (active) link.setAttribute('aria-current', 'location');
+                    else link.removeAttribute('aria-current');
+                });
+            };
+            const updateActiveNav = () => {
+                const marker = Math.min(window.innerHeight * 0.35, 260);
+                const current = [...navSections].reverse().find((section) => section.getBoundingClientRect().top <= marker);
+                setActiveNav(current?.id || 'beranda');
+            };
+            updateActiveNav();
+            window.addEventListener('scroll', updateActiveNav, { passive: true });
+            window.addEventListener('hashchange', updateActiveNav);
 
             const button = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
