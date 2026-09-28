@@ -113,10 +113,11 @@
     <div class="relative min-h-screen bg-hero">
         
         <!-- Overlay gelap terkonsentrasi di sisi teks; foto pengurus di kanan tetap terlihat jelas. -->
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-transparent"></div>
+        <div aria-hidden="true" class="absolute inset-0 z-0 bg-gradient-to-r from-emerald-950/85 via-emerald-950/45 to-transparent"></div>
+        <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 z-10 h-40 bg-gradient-to-b from-emerald-950/80 via-emerald-950/30 to-transparent md:h-48"></div>
 
         <!-- Header / Navigasi -->
-        <header id="main-nav" data-reveal="from-top" class="fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between border-b border-transparent bg-transparent px-6 py-4 transition-all duration-300 md:px-12 md:py-5">
+        <header id="main-nav" data-reveal="from-top" class="fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between border-b border-emerald-500/20 bg-emerald-950/30 px-6 py-4 backdrop-blur-md transition-all duration-300 md:px-12 md:py-5">
             
             <!-- Area Kiri (Dibiarkan kosong untuk menyeimbangkan logo di kanan) -->
             <div class="w-1/4 hidden md:block"></div>
@@ -154,13 +155,13 @@
         </header>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" aria-hidden="true" class="hidden md:hidden fixed left-6 right-6 top-20 z-40 rounded-xl border border-white/10 bg-slate-900/95 p-4 shadow-2xl backdrop-blur-md">
+        <div id="mobile-menu" aria-hidden="true" class="hidden md:hidden fixed left-6 right-6 top-20 z-40 rounded-xl border border-emerald-400/20 bg-emerald-950/95 p-4 shadow-2xl backdrop-blur-md">
             <ul class="flex flex-col space-y-4 text-white text-center font-medium">
-                <li><a href="#" class="block py-2 hover:bg-white/10 rounded">Beranda</a></li>
-                <li><a href="#profil" class="block py-2 hover:bg-white/10 rounded">Profil</a></li>
-                <li><a href="#proker" class="block py-2 hover:bg-white/10 rounded">Program Kerja</a></li>
-                <li><a href="#berita" class="block py-2 hover:bg-white/10 rounded">Berita</a></li>
-                <li><a href="#connect" class="block py-2 hover:bg-white/10 rounded">Connect with Us</a></li>
+                <li><a href="#" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Beranda</a></li>
+                <li><a href="#profil" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Profil</a></li>
+                <li><a href="#proker" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Program Kerja</a></li>
+                <li><a href="#berita" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Berita</a></li>
+                <li><a href="#connect" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Connect with Us</a></li>
             </ul>
         </div>
 
@@ -171,7 +172,7 @@
                 
                 <!-- Kotak Transparan di Kiri (Glassmorphism Effect) -->
                 <div data-reveal="from-left" class="w-full md:w-1/2 lg:w-5/12 transform transition-all duration-700 hover:scale-[1.02]">
-                    <div class="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md md:p-12">
+                    <div class="relative overflow-hidden rounded-3xl border border-white/20 bg-emerald-950/20 p-8 shadow-2xl backdrop-blur-md md:p-12">
                         
                         <!-- Aksen dekorasi di dalam kotak -->
                         <div class="absolute top-0 right-0 w-32 h-32 bg-green-400/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
@@ -205,7 +206,7 @@
                                         Kenali Kami
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </a>
-                                    <a href="#connect" class="inline-flex items-center rounded-xl border border-white/40 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-all hover:bg-white/10">
+                                    <a href="#connect" class="inline-flex items-center rounded-xl border border-emerald-400/40 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-all hover:bg-emerald-500/20">
                                         Connect with Us
                                     </a>
                                 </div>
@@ -218,7 +219,7 @@
         </main>
 
         <!-- Memudarkan foto secara bertahap ke latar putih bagian anggota. -->
-        <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-44 bg-gradient-to-b from-transparent via-slate-950/20 to-white md:h-52"></div>
+        <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-44 bg-gradient-to-b from-transparent via-emerald-950/20 to-white md:h-52"></div>
         
         <!-- Ornamen bawah / indikator scroll -->
         <div class="scroll-cue absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center">
@@ -453,7 +454,7 @@
                 <p id="suggestion-status" class="min-h-5 text-center text-xs leading-relaxed text-gray-500" role="status" aria-live="polite"></p>
             </form>
         </div>
-        <summary class="suggestion-trigger flex cursor-pointer list-none items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 font-medium text-white transition-all hover:scale-105 hover:bg-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-300 z-50 [&::-webkit-details-marker]:hidden">
+        <summary class="suggestion-trigger z-50 flex cursor-pointer list-none items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 font-medium text-white shadow-lg shadow-emerald-600/40 transition-all hover:scale-105 hover:bg-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-300 [&::-webkit-details-marker]:hidden">
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h8M8 14h5m-8 6 2.5-3H18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12z"/></svg>
             </span>
@@ -512,9 +513,10 @@
             const navbar = document.getElementById('main-nav');
             const syncNavbar = () => {
                 const scrolled = window.scrollY > 24;
-                navbar?.classList.toggle('bg-slate-900/80', scrolled);
-                navbar?.classList.toggle('backdrop-blur-md', scrolled);
-                navbar?.classList.toggle('border-white/10', scrolled);
+                navbar?.classList.toggle('bg-emerald-950/40', scrolled);
+                navbar?.classList.toggle('bg-emerald-950/30', !scrolled);
+                navbar?.classList.toggle('border-emerald-500/20', scrolled);
+                navbar?.classList.toggle('border-emerald-500/15', !scrolled);
                 navbar?.classList.toggle('shadow-lg', scrolled);
             };
             syncNavbar();
