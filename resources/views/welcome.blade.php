@@ -49,7 +49,7 @@
             background-repeat: no-repeat;
         }
         #profil {
-            background: linear-gradient(180deg, #0a5b46 0%, #e8f3ed 110px, #f8fafc 240px, #f8fafc calc(100% - 140px), #ffffff 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 38%, #f8fafc 100%);
         }
         #proker {
             background: linear-gradient(180deg, #ffffff 0%, #f7fbf8 48%, #f8fafc 100%);
@@ -60,7 +60,7 @@
         #connect {
             background: linear-gradient(180deg, #eaf5ee 0%, #0b6049 24%, #064e3b 58%, #043c2f 100%);
         }
-        #profil, #proker { scroll-margin-top: 1rem; }
+        #profil, #proker, #berita, #connect { scroll-margin-top: 6rem; }
         @keyframes scroll-cue {
             0%, 100% { translate: 0 0; }
             50% { translate: 0 12px; }
@@ -99,13 +99,7 @@
             transition: max-height 360ms cubic-bezier(.2, .7, .2, 1), opacity 240ms ease, transform 360ms cubic-bezier(.2, .7, .2, 1);
         }
         #mobile-menu.is-open { max-height: 24rem; opacity: 1; transform: translate3d(0, 0, 0); pointer-events: auto; }
-        .suggestion-trigger {
-            box-shadow: 0 10px 28px rgba(6, 78, 59, .3), 0 0 22px rgba(16, 185, 129, .22);
-            transition: transform 280ms ease, box-shadow 320ms ease, background-color 280ms ease;
-        }
-        .suggestion-trigger:hover, .suggestion-trigger:focus-visible {
-            box-shadow: 0 14px 36px rgba(6, 78, 59, .4), 0 0 30px rgba(16, 185, 129, .34);
-        }
+        .suggestion-trigger { box-shadow: 0 10px 28px rgba(16, 185, 129, .4); }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
             .scroll-cue { animation: none !important; }
@@ -118,25 +112,23 @@
     <!-- Wrapper Utama dengan background hero -->
     <div class="relative min-h-screen bg-hero">
         
-        <!-- Overlay Hijau Tua Transparan -->
-        <!-- Menggunakan persentase opacity agar orang-orang di foto tetap terlihat samar namun elegan -->
-        <div class="absolute inset-0 bg-bpm-green-900/45 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-bpm-green-900/65 via-bpm-green-900/30 to-transparent"></div>
+        <!-- Overlay gelap terkonsentrasi di sisi teks; foto pengurus di kanan tetap terlihat jelas. -->
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-transparent"></div>
 
         <!-- Header / Navigasi -->
-        <header data-reveal="from-top" class="relative z-20 w-full px-6 py-4 md:px-12 md:py-6 flex justify-between items-center">
+        <header id="main-nav" data-reveal="from-top" class="fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between border-b border-transparent bg-transparent px-6 py-4 transition-all duration-300 md:px-12 md:py-5">
             
             <!-- Area Kiri (Dibiarkan kosong untuk menyeimbangkan logo di kanan) -->
             <div class="w-1/4 hidden md:block"></div>
 
             <!-- Menu di Tengah -->
             <nav class="hidden md:flex w-2/4 justify-center">
-                <ul class="flex space-x-8 text-white font-medium text-sm tracking-wide">
-                    <li><a href="#" class="hover:text-green-300 transition-colors duration-300 border-b-2 border-transparent hover:border-green-300 pb-1">Beranda</a></li>
-                    <li><a href="#profil" class="hover:text-green-300 transition-colors duration-300 border-b-2 border-transparent hover:border-green-300 pb-1">Profil</a></li>
-                    <li><a href="#proker" class="hover:text-green-300 transition-colors duration-300 border-b-2 border-transparent hover:border-green-300 pb-1">Program Kerja</a></li>
-                    <li><a href="#berita" class="hover:text-green-300 transition-colors duration-300 border-b-2 border-transparent hover:border-green-300 pb-1">Berita</a></li>
-                    <li><a href="#connect" class="hover:text-green-300 transition-colors duration-300 border-b-2 border-transparent hover:border-green-300 pb-1">Connect with Us</a></li>
+                <ul class="flex space-x-8 text-sm font-medium tracking-wide text-white">
+                    <li><a href="#" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Beranda</a></li>
+                    <li><a href="#profil" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Profil</a></li>
+                    <li><a href="#proker" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Program Kerja</a></li>
+                    <li><a href="#berita" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Berita</a></li>
+                    <li><a href="#connect" class="border-b-2 border-transparent pb-1 transition-colors duration-300 hover:border-emerald-300 hover:text-emerald-200">Connect with Us</a></li>
                 </ul>
             </nav>
 
@@ -162,7 +154,7 @@
         </header>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" aria-hidden="true" class="hidden md:hidden absolute top-20 left-6 right-6 z-30 bg-bpm-green-900/95 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl p-4">
+        <div id="mobile-menu" aria-hidden="true" class="hidden md:hidden fixed left-6 right-6 top-20 z-40 rounded-xl border border-white/10 bg-slate-900/95 p-4 shadow-2xl backdrop-blur-md">
             <ul class="flex flex-col space-y-4 text-white text-center font-medium">
                 <li><a href="#" class="block py-2 hover:bg-white/10 rounded">Beranda</a></li>
                 <li><a href="#profil" class="block py-2 hover:bg-white/10 rounded">Profil</a></li>
@@ -173,13 +165,13 @@
         </div>
 
         <!-- Main Content (Hero Section) -->
-        <main class="relative z-10 flex flex-col justify-center min-h-[calc(100vh-100px)] px-6 md:px-16 lg:px-24 pb-20">
+        <main class="relative z-10 flex min-h-screen flex-col justify-center px-6 pb-24 pt-28 md:px-16 md:pb-20 md:pt-32 lg:px-24">
             
             <div class="max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center justify-start">
                 
                 <!-- Kotak Transparan di Kiri (Glassmorphism Effect) -->
                 <div data-reveal="from-left" class="w-full md:w-1/2 lg:w-5/12 transform transition-all duration-700 hover:scale-[1.02]">
-                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-12 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] relative overflow-hidden">
+                    <div class="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-md md:p-12">
                         
                         <!-- Aksen dekorasi di dalam kotak -->
                         <div class="absolute top-0 right-0 w-32 h-32 bg-green-400/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
@@ -209,11 +201,11 @@
                                 
                                 <!-- Tombol Aksi -->
                                 <div class="flex flex-wrap gap-4 mt-4">
-                                    <a href="#profil" class="px-6 py-3 bg-white text-bpm-green-900 font-bold text-sm uppercase tracking-wide rounded-full shadow-lg hover:bg-green-100 hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                                    <a href="#profil" class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg shadow-emerald-600/30 transition-all hover:scale-[1.02] hover:bg-emerald-500">
                                         Kenali Kami
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </a>
-                                    <a href="#connect" class="px-6 py-3 bg-transparent border-2 border-white/50 text-white font-bold text-sm uppercase tracking-wide rounded-full hover:bg-white/10 hover:border-white transition-all duration-300">
+                                    <a href="#connect" class="inline-flex items-center rounded-xl border border-white/40 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-all hover:bg-white/10">
                                         Connect with Us
                                     </a>
                                 </div>
@@ -224,6 +216,9 @@
 
             </div>
         </main>
+
+        <!-- Memudarkan foto secara bertahap ke latar putih bagian anggota. -->
+        <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-44 bg-gradient-to-b from-transparent via-slate-950/20 to-white md:h-52"></div>
         
         <!-- Ornamen bawah / indikator scroll -->
         <div class="scroll-cue absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center">
@@ -248,10 +243,19 @@
                 </p>
             </div>
 
+            <div class="mb-10 flex flex-wrap justify-center gap-3" role="group" aria-label="Filter anggota berdasarkan divisi">
+                <button type="button" data-member-filter="all" aria-pressed="true" class="member-filter rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-700/20 transition-all hover:-translate-y-0.5 hover:bg-emerald-600">Semua</button>
+                <button type="button" data-member-filter="bph" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">BPH</button>
+                <button type="button" data-member-filter="komisi-1" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">Komisi I</button>
+                <button type="button" data-member-filter="komisi-2" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">Komisi II</button>
+                <button type="button" data-member-filter="komisi-3" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">Komisi III</button>
+            </div>
+
             <!-- Struktur bertingkat: BPH diikuti tiga komisi -->
             <div class="space-y-12">
-                @foreach($profileGroups as $group)
-                    <section aria-label="{{ $group['label'] }}">
+                @foreach($profileGroups as $tierKey => $group)
+                    @php($filterGroup = $tierKey === 'bph' ? 'bph' : 'komisi-'.(array_search($tierKey, ['anggaran', 'kemahasiswaan', 'organisasi'], true) + 1))
+                    <section data-member-section="{{ $filterGroup }}" aria-label="{{ $group['label'] }}">
                         <div data-reveal class="mb-6 border-b border-emerald-200 pb-4">
                             <div>
                                 <p class="mb-1 text-xs font-bold uppercase tracking-[.2em] text-bpm-green-700">{{ $group['subtitle'] }}</p>
@@ -261,12 +265,12 @@
                         @if($group['members']->isNotEmpty())
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                                 @foreach($group['members'] as $member)
-                                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 4) * 80, 240) }}ms" class="group overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-md shadow-emerald-900/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-900/10">
-                                        <div class="relative aspect-[2/3] overflow-hidden bg-emerald-50">
-                                            <img src="{{ $member->photo_path ? asset('uploads/profiles/'.$member->photo_path) : 'https://placehold.co/400x600/e2e8f0/064e3b?text=Foto+' . $loop->iteration }}" alt="Foto {{ $member->name }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 4) * 80, 240) }}ms" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
+                                        <div class="relative aspect-[2/3] overflow-hidden rounded-xl bg-emerald-50">
+                                            <img src="{{ $member->photo_path ? asset('uploads/profiles/'.$member->photo_path) : 'https://placehold.co/400x600/e2e8f0/064e3b?text=Foto+' . $loop->iteration }}" alt="Foto {{ $member->name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
                                         </div>
-                                        <div class="p-5 text-center">
-                                            <p class="mb-2 inline-flex max-w-full items-center rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-bpm-green-800">{{ $member->position }}</p>
+                                        <div class="pt-4 text-center">
+                                            <p class="mb-2 inline-block max-w-full rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">{{ $member->position }}</p>
                                             <h4 class="text-lg font-bold text-gray-900">{{ $member->name }}</h4>
                                         </div>
                                     </article>
@@ -449,7 +453,7 @@
                 <p id="suggestion-status" class="min-h-5 text-center text-xs leading-relaxed text-gray-500" role="status" aria-live="polite"></p>
             </form>
         </div>
-        <summary class="suggestion-trigger flex cursor-pointer list-none items-center gap-3 rounded-full bg-bpm-green-800 py-3 pl-4 pr-5 text-white transition hover:-translate-y-1 hover:bg-bpm-green-900 focus:outline-none focus:ring-4 focus:ring-emerald-300 [&::-webkit-details-marker]:hidden">
+        <summary class="suggestion-trigger flex cursor-pointer list-none items-center gap-2 rounded-full bg-emerald-600 px-5 py-3 font-medium text-white transition-all hover:scale-105 hover:bg-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-300 z-50 [&::-webkit-details-marker]:hidden">
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h8M8 14h5m-8 6 2.5-3H18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12z"/></svg>
             </span>
@@ -479,6 +483,42 @@
                     items.forEach((item) => revealObserver.observe(item));
                 }
             }
+
+            const filterButtons = document.querySelectorAll('[data-member-filter]');
+            const memberSections = document.querySelectorAll('[data-member-section]');
+            filterButtons.forEach((filterButton) => {
+                filterButton.addEventListener('click', () => {
+                    const selected = filterButton.dataset.memberFilter;
+                    filterButtons.forEach((button) => {
+                        const active = button === filterButton;
+                        button.setAttribute('aria-pressed', String(active));
+                        button.classList.toggle('bg-emerald-700', active);
+                        button.classList.toggle('text-white', active);
+                        button.classList.toggle('shadow-md', active);
+                        button.classList.toggle('shadow-emerald-700/20', active);
+                        button.classList.toggle('border', !active);
+                        button.classList.toggle('border-emerald-200', !active);
+                        button.classList.toggle('bg-white', !active);
+                        button.classList.toggle('text-slate-700', !active);
+                    });
+                    memberSections.forEach((section) => {
+                        const hideSection = selected !== 'all' && section.dataset.memberSection !== selected;
+                        section.hidden = hideSection;
+                        section.classList.toggle('hidden', hideSection);
+                    });
+                });
+            });
+
+            const navbar = document.getElementById('main-nav');
+            const syncNavbar = () => {
+                const scrolled = window.scrollY > 24;
+                navbar?.classList.toggle('bg-slate-900/80', scrolled);
+                navbar?.classList.toggle('backdrop-blur-md', scrolled);
+                navbar?.classList.toggle('border-white/10', scrolled);
+                navbar?.classList.toggle('shadow-lg', scrolled);
+            };
+            syncNavbar();
+            window.addEventListener('scroll', syncNavbar, { passive: true });
 
             const button = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
