@@ -66,9 +66,43 @@
             50% { translate: 0 12px; }
         }
         .scroll-cue { animation: scroll-cue 1.6s ease-in-out infinite; will-change: translate; }
+        @media (prefers-reduced-motion: no-preference) {
+            .motion-ready [data-reveal] {
+                opacity: 0;
+                transform: translate3d(0, 24px, 0);
+                transition: opacity 720ms cubic-bezier(.2, .7, .2, 1), transform 720ms cubic-bezier(.2, .7, .2, 1);
+                transition-delay: var(--reveal-delay, 0ms);
+                will-change: opacity, transform;
+            }
+            .motion-ready [data-reveal="from-left"] { transform: translate3d(-28px, 0, 0); }
+            .motion-ready [data-reveal="from-right"] { transform: translate3d(28px, 0, 0); }
+            .motion-ready [data-reveal="from-top"] { transform: translate3d(0, -18px, 0); }
+            .motion-ready [data-reveal].is-visible { opacity: 1; transform: translate3d(0, 0, 0); will-change: auto; }
+            .ambient-orb { animation: orb-drift 16s ease-in-out infinite alternate; transform-origin: center; }
+            .ambient-orb-delay { animation-delay: -8s; }
+            @keyframes orb-drift {
+                from { transform: translate3d(0, 0, 0) scale(1); }
+                to { transform: translate3d(18px, -14px, 0) scale(1.08); }
+            }
+            #suggestion-widget[open] #suggestion-panel { animation: suggestion-in 320ms cubic-bezier(.2, .7, .2, 1) both; }
+            @keyframes suggestion-in {
+                from { opacity: 0; transform: translate3d(0, 12px, 0) scale(.98); }
+                to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+            }
+        }
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translate3d(0, -8px, 0);
+            pointer-events: none;
+            transition: max-height 360ms cubic-bezier(.2, .7, .2, 1), opacity 240ms ease, transform 360ms cubic-bezier(.2, .7, .2, 1);
+        }
+        #mobile-menu.is-open { max-height: 24rem; opacity: 1; transform: translate3d(0, 0, 0); pointer-events: auto; }
         @media (prefers-reduced-motion: reduce) {
-            * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-            .scroll-cue { animation: scroll-cue 1.6s ease-in-out infinite !important; }
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+            .scroll-cue { animation: none !important; }
+            #mobile-menu { transition: none !important; }
         }
     </style>
 </head>
@@ -83,7 +117,7 @@
         <div class="absolute inset-0 bg-gradient-to-r from-bpm-green-900/65 via-bpm-green-900/30 to-transparent"></div>
 
         <!-- Header / Navigasi -->
-        <header class="relative z-20 w-full px-6 py-4 md:px-12 md:py-6 flex justify-between items-center">
+        <header data-reveal="from-top" class="relative z-20 w-full px-6 py-4 md:px-12 md:py-6 flex justify-between items-center">
             
             <!-- Area Kiri (Dibiarkan kosong untuk menyeimbangkan logo di kanan) -->
             <div class="w-1/4 hidden md:block"></div>
@@ -113,7 +147,7 @@
             </div>
 
             <!-- Mobile Menu Button (Hamburger) -->
-            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none absolute left-6">
+            <button id="mobile-menu-btn" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden text-white focus:outline-none absolute left-6">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -121,7 +155,7 @@
         </header>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-6 right-6 z-30 bg-bpm-green-900/95 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl p-4 transition-all">
+        <div id="mobile-menu" aria-hidden="true" class="hidden md:hidden absolute top-20 left-6 right-6 z-30 bg-bpm-green-900/95 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl p-4">
             <ul class="flex flex-col space-y-4 text-white text-center font-medium">
                 <li><a href="#" class="block py-2 hover:bg-white/10 rounded">Beranda</a></li>
                 <li><a href="#profil" class="block py-2 hover:bg-white/10 rounded">Profil</a></li>
@@ -137,7 +171,7 @@
             <div class="max-w-7xl w-full mx-auto flex flex-col md:flex-row items-center justify-start">
                 
                 <!-- Kotak Transparan di Kiri (Glassmorphism Effect) -->
-                <div class="w-full md:w-1/2 lg:w-5/12 transform transition-all duration-700 hover:scale-[1.02]">
+                <div data-reveal="from-left" class="w-full md:w-1/2 lg:w-5/12 transform transition-all duration-700 hover:scale-[1.02]">
                     <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-12 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] relative overflow-hidden">
                         
                         <!-- Aksen dekorasi di dalam kotak -->
@@ -198,7 +232,7 @@
     <section id="profil" class="relative py-24 px-6 md:px-16 lg:px-24">
         <div class="max-w-7xl mx-auto">
             <!-- Judul Section -->
-            <div class="text-center mb-16">
+            <div data-reveal class="text-center mb-16">
                 <h3 class="text-bpm-green-700 font-semibold tracking-widest uppercase text-sm mb-2">Struktur Organisasi</h3>
                 <h2 class="text-gray-900 font-black text-3xl md:text-5xl mb-4">Anggota BPM FTD</h2>
                 <div class="w-24 h-1.5 bg-bpm-green-700 mx-auto rounded-full mb-6"></div>
@@ -211,7 +245,7 @@
             <div class="space-y-12">
                 @foreach($profileGroups as $group)
                     <section aria-label="{{ $group['label'] }}">
-                        <div class="mb-6 border-b border-emerald-200 pb-4">
+                        <div data-reveal class="mb-6 border-b border-emerald-200 pb-4">
                             <div>
                                 <p class="mb-1 text-xs font-bold uppercase tracking-[.2em] text-bpm-green-700">{{ $group['subtitle'] }}</p>
                                 <h3 class="text-2xl font-black text-gray-900 md:text-3xl">{{ $group['label'] }}</h3>
@@ -220,9 +254,9 @@
                         @if($group['members']->isNotEmpty())
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                                 @foreach($group['members'] as $member)
-                                    <article class="group overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-md shadow-emerald-950/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 4) * 80, 240) }}ms" class="group overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-md shadow-emerald-950/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl">
                                         <div class="relative aspect-[2/3] overflow-hidden bg-emerald-50">
-                                            <img src="{{ $member->photo_path ? asset('uploads/profiles/'.$member->photo_path) : 'https://placehold.co/400x600/e2e8f0/064e3b?text=Foto+' . $loop->iteration }}" alt="Foto {{ $member->name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.01]">
+                                            <img src="{{ $member->photo_path ? asset('uploads/profiles/'.$member->photo_path) : 'https://placehold.co/400x600/e2e8f0/064e3b?text=Foto+' . $loop->iteration }}" alt="Foto {{ $member->name }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]">
                                         </div>
                                         <div class="p-5 text-center">
                                             <h4 class="mb-1 text-lg font-bold text-gray-900">{{ $member->name }}</h4>
@@ -242,7 +276,7 @@
     <!-- Bagian Program Kerja -->
     <section id="proker" class="relative py-24 px-6 md:px-16 lg:px-24">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div data-reveal class="text-center mb-16">
                 <h3 class="text-bpm-green-700 font-semibold tracking-widest uppercase text-sm mb-2">Pendampingan Organisasi</h3>
                 <h2 class="text-gray-900 font-black text-3xl md:text-5xl mb-4">Program Kerja HMP FTD</h2>
                 <div class="w-24 h-1.5 bg-bpm-green-700 mx-auto rounded-full mb-6"></div>
@@ -250,7 +284,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($programs as $program)
-                    <article class="bg-slate-50 rounded-2xl p-6 md:p-8 border border-gray-200 hover:border-bpm-green-700 hover:shadow-xl transition-all duration-300">
+                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 3) * 90, 180) }}ms" class="bg-slate-50 rounded-2xl p-6 md:p-8 border border-gray-200 hover:border-bpm-green-700 hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-out">
                         <span class="inline-flex px-3 py-1 bg-green-100 text-bpm-green-800 text-xs font-bold rounded-full uppercase tracking-wider">{{ $program->label }}</span>
                         <h3 class="text-xl font-bold text-gray-900 mt-4 mb-2">{{ $program->title }}</h3>
                         <p class="text-gray-600 text-sm leading-relaxed mb-6">{{ $program->description }}</p>
@@ -272,7 +306,7 @@
     <!-- Bagian Berita & Pengumuman -->
     <section id="berita" class="relative py-24 px-6 md:px-16 lg:px-24">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
+            <div data-reveal class="text-center mb-16">
                 <h3 class="text-bpm-green-700 font-semibold tracking-widest uppercase text-sm mb-2">Kabar Fakultas</h3>
                 <h2 class="text-gray-900 font-black text-3xl md:text-5xl mb-4">Berita &amp; Pengumuman</h2>
                 <div class="w-24 h-1.5 bg-bpm-green-700 mx-auto rounded-full mb-6"></div>
@@ -280,7 +314,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($announcements as $announcement)
-                    <article class="bg-white rounded-2xl p-7 border border-gray-100 shadow-md shadow-emerald-950/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 3) * 90, 180) }}ms" class="bg-white rounded-2xl p-7 border border-gray-100 shadow-md shadow-emerald-950/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out">
                         <span class="inline-flex px-3 py-1 bg-green-100 text-bpm-green-800 text-xs font-bold rounded-full uppercase tracking-wider">{{ $announcement->label }}</span>
                         <h3 class="text-xl font-bold text-gray-900 mt-5 mb-3">{{ $announcement->title }}</h3>
                         <p class="text-gray-600 text-sm leading-relaxed mb-6">{{ $announcement->description }}</p>
@@ -297,21 +331,23 @@
     <section id="connect" class="relative py-20 px-6 md:px-16 lg:px-24 text-white overflow-hidden">
         <!-- Aksen Latar -->
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-green-400 to-transparent opacity-50"></div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute top-10 -left-24 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
+        <div class="ambient-orb absolute -bottom-24 -right-24 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+        <div class="ambient-orb ambient-orb-delay absolute top-10 -left-24 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
 
         <div class="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
+            <div data-reveal>
             <h3 class="text-green-300 font-semibold tracking-widest uppercase text-sm mb-3">Mari Terhubung</h3>
             <h2 class="font-black text-4xl md:text-5xl mb-6">Connect With Us</h2>
             <p class="text-gray-300 max-w-2xl mb-12 text-sm md:text-base">
                 Tetap terhubung dan dapatkan informasi terbaru seputar kegiatan, program kerja, serta layanan aspirasi mahasiswa dari BPM FTD melalui kanal resmi kami.
             </p>
+            </div>
 
             <!-- Grid Social Media & Email -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-4xl">
                 
                 <!-- Instagram -->
-                <a href="#" target="_blank" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 hover:-translate-y-1 group">
+                <a data-reveal style="--reveal-delay: 0ms" href="#" target="_blank" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-500 hover:-translate-y-1 group">
                     <div class="w-14 h-14 bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 rounded-full flex items-center justify-center mb-4 p-0.5 group-hover:scale-110 transition-transform duration-300">
                         <div class="w-full h-full bg-bpm-green-900 rounded-full flex items-center justify-center group-hover:bg-transparent transition-colors duration-300">
                             <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -324,7 +360,7 @@
                 </a>
 
                 <!-- TikTok -->
-                <a href="#" target="_blank" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 hover:-translate-y-1 group">
+                <a data-reveal style="--reveal-delay: 80ms" href="#" target="_blank" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-500 hover:-translate-y-1 group">
                     <div class="w-14 h-14 bg-gray-800 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-black transition-all duration-300">
                         <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/>
@@ -335,7 +371,7 @@
                 </a>
 
                 <!-- YouTube -->
-                <a href="#" target="_blank" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 hover:-translate-y-1 group">
+                <a data-reveal style="--reveal-delay: 160ms" href="#" target="_blank" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-500 hover:-translate-y-1 group">
                     <div class="w-14 h-14 bg-red-600/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-red-600 transition-all duration-300">
                         <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -346,7 +382,7 @@
                 </a>
 
                 <!-- Email -->
-                <a href="mailto:emailanda@domain.com" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-300 hover:-translate-y-1 group">
+                <a data-reveal style="--reveal-delay: 240ms" href="mailto:emailanda@domain.com" class="flex flex-col items-center justify-center p-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all duration-500 hover:-translate-y-1 group">
                     <div class="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-blue-500 transition-all duration-300">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -414,20 +450,56 @@
         </summary>
     </details>
     <script>
-        // Script untuk membuka/tutup menu di tampilan HP (Mobile)
-        document.addEventListener('DOMContentLoaded', () => {
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
+        (() => {
+            const items = document.querySelectorAll('[data-reveal]');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-                // Tambahkan sedikit efek transisi saat dibuka
-                if(!menu.classList.contains('hidden')){
-                    menu.classList.add('animate-pulse', 'duration-75');
-                    setTimeout(() => menu.classList.remove('animate-pulse'), 100);
+            if (!reduceMotion && items.length) {
+                document.documentElement.classList.add('motion-ready');
+
+                if (!('IntersectionObserver' in window)) {
+                    items.forEach((item) => item.classList.add('is-visible'));
+                } else {
+                    const revealObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+                    items.forEach((item) => revealObserver.observe(item));
                 }
+            }
+
+            const button = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            if (!button || !menu) return;
+
+            let hideTimer;
+            const setMenuOpen = (open) => {
+                window.clearTimeout(hideTimer);
+                button.setAttribute('aria-expanded', String(open));
+
+                if (open) {
+                    menu.classList.remove('hidden');
+                    menu.setAttribute('aria-hidden', 'false');
+                    window.requestAnimationFrame(() => menu.classList.add('is-open'));
+                    return;
+                }
+
+                menu.classList.remove('is-open');
+                menu.setAttribute('aria-hidden', 'true');
+                hideTimer = window.setTimeout(() => menu.classList.add('hidden'), 380);
+            };
+
+            button.addEventListener('click', () => setMenuOpen(button.getAttribute('aria-expanded') !== 'true'));
+            menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuOpen(false)));
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
             });
-        });
+        })();
     </script>
     <script>
         document.getElementById('suggestion-form')?.addEventListener('submit', async (event) => {
