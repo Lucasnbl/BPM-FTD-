@@ -106,9 +106,8 @@
                         <p class="text-white font-bold text-sm tracking-wider uppercase">BPM FTD</p>
                         <p class="text-green-200 text-xs opacity-80">Parlemen Mahasiswa</p>
                     </div>
-                    <!-- Placeholder Logo (Ganti src dengan logo asli nanti jika ada) -->
-                    <div class="w-36 md:w-40 shrink-0 rounded-lg bg-white px-2 py-1 shadow-lg hover:scale-[1.03] transition-transform duration-300">
-                        <img src="{{ asset('images/logo-ftd.png') }}" alt="Logo Fakultas Teknologi &amp; Desain Universitas Ma Chung" class="block w-full h-auto object-contain">
+                    <div class="h-14 w-14 shrink-0 overflow-hidden rounded-full bg-white p-1 shadow-lg ring-1 ring-white/50 transition-transform duration-300 hover:scale-[1.04] md:h-16 md:w-16">
+                        <img src="{{ asset('images/logo-bpm-ftd.jpg') }}" alt="Logo Badan Perwakilan Mahasiswa Fakultas Teknologi dan Desain" class="block h-full w-full rounded-full object-cover">
                     </div>
                 </div>
             </div>
