@@ -140,7 +140,7 @@
                         <p class="text-white font-bold text-sm tracking-wider uppercase">BPM FTD</p>
                         <p class="text-green-200 text-xs opacity-80">Parlemen Mahasiswa</p>
                     </div>
-                    <div class="h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white p-1 shadow-lg ring-1 ring-white/50 transition-transform duration-300 hover:scale-[1.04] md:h-20 md:w-20">
+                    <div class="h-14 w-14 shrink-0 overflow-hidden rounded-full bg-white p-1 shadow-lg ring-1 ring-white/50 transition-transform duration-300 hover:scale-[1.04] md:h-[4.5rem] md:w-[4.5rem]">
                         <img src="{{ asset('images/logo-bpm-ftd.jpg') }}" alt="Logo Badan Perwakilan Mahasiswa Fakultas Teknologi dan Desain" class="block h-full w-full rounded-full object-cover">
                     </div>
                 </div>
