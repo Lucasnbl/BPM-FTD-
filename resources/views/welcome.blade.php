@@ -49,7 +49,7 @@
             background-repeat: no-repeat;
         }
         #profil {
-            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 38%, #f8fafc 100%);
+            background: linear-gradient(180deg, #064e3b 0%, #022c22 28%, #020f0d 100%);
         }
         #proker {
             background: linear-gradient(180deg, #ffffff 0%, #f7fbf8 48%, #f8fafc 100%);
@@ -69,15 +69,15 @@
         @media (prefers-reduced-motion: no-preference) {
             .motion-ready [data-reveal] {
                 opacity: 0;
-                transform: translate3d(0, 24px, 0);
-                transition: opacity 720ms cubic-bezier(.2, .7, .2, 1), transform 720ms cubic-bezier(.2, .7, .2, 1);
+                translate: 0 24px;
+                transition: opacity 720ms cubic-bezier(.2, .7, .2, 1), translate 720ms cubic-bezier(.2, .7, .2, 1);
                 transition-delay: var(--reveal-delay, 0ms);
-                will-change: opacity, transform;
+                will-change: opacity, translate;
             }
-            .motion-ready [data-reveal="from-left"] { transform: translate3d(-28px, 0, 0); }
-            .motion-ready [data-reveal="from-right"] { transform: translate3d(28px, 0, 0); }
-            .motion-ready [data-reveal="from-top"] { transform: translate3d(0, -18px, 0); }
-            .motion-ready [data-reveal].is-visible { opacity: 1; transform: translate3d(0, 0, 0); will-change: auto; }
+            .motion-ready [data-reveal="from-left"] { translate: -28px 0; }
+            .motion-ready [data-reveal="from-right"] { translate: 28px 0; }
+            .motion-ready [data-reveal="from-top"] { translate: 0 -18px; }
+            .motion-ready [data-reveal].is-visible { opacity: 1; translate: 0 0; will-change: auto; }
             .ambient-orb { animation: orb-drift 16s ease-in-out infinite alternate; transform-origin: center; }
             .ambient-orb-delay { animation-delay: -8s; }
             @keyframes orb-drift {
@@ -217,7 +217,7 @@
         </main>
 
         <!-- Memudarkan foto secara bertahap ke latar putih bagian anggota. -->
-        <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-44 bg-gradient-to-b from-transparent via-emerald-950/20 to-white md:h-52"></div>
+        <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-44 bg-gradient-to-b from-transparent via-emerald-950/20 to-emerald-900 md:h-52"></div>
         
         <!-- Ornamen bawah / indikator scroll -->
         <div class="scroll-cue absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center">
@@ -234,49 +234,39 @@
         <div class="max-w-7xl mx-auto">
             <!-- Judul Section -->
             <div data-reveal class="text-center mb-16">
-                <h3 class="text-bpm-green-700 font-semibold tracking-widest uppercase text-sm mb-2">Struktur Organisasi</h3>
-                <h2 class="text-gray-900 font-black text-3xl md:text-5xl mb-4">Anggota BPM FTD</h2>
-                <div class="w-24 h-1.5 bg-bpm-green-700 mx-auto rounded-full mb-6"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto md:text-lg">
+                <h3 class="mb-2 text-sm font-semibold uppercase tracking-widest text-emerald-300">Struktur Organisasi</h3>
+                <h2 class="mb-4 text-3xl font-black text-white md:text-5xl">Anggota BPM FTD</h2>
+                <div class="mx-auto mb-6 h-1.5 w-24 rounded-full bg-emerald-400"></div>
+                <p class="mx-auto max-w-2xl text-emerald-50/75 md:text-lg">
                     {{ $homeContent?->profile_intro ?? 'Mari berkenalan dengan para pengurus BPM FTD yang siap mewujudkan aspirasi mahasiswa.' }}
                 </p>
-            </div>
-
-            <div class="mb-10 flex flex-wrap justify-center gap-3" role="group" aria-label="Filter anggota berdasarkan divisi">
-                <button type="button" data-member-filter="all" aria-pressed="true" class="member-filter rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-700/20 transition-all hover:-translate-y-0.5 hover:bg-emerald-600">Semua</button>
-                <button type="button" data-member-filter="bph" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">BPH</button>
-                <button type="button" data-member-filter="komisi-1" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">Komisi I</button>
-                <button type="button" data-member-filter="komisi-2" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">Komisi II</button>
-                <button type="button" data-member-filter="komisi-3" aria-pressed="false" class="member-filter rounded-full border border-emerald-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-emerald-400 hover:text-emerald-800">Komisi III</button>
             </div>
 
             <!-- Struktur bertingkat: BPH diikuti tiga komisi -->
             <div class="space-y-12">
                 @foreach($profileGroups as $tierKey => $group)
-                    @php($filterGroup = $tierKey === 'bph' ? 'bph' : 'komisi-'.(array_search($tierKey, ['anggaran', 'kemahasiswaan', 'organisasi'], true) + 1))
-                    <section data-member-section="{{ $filterGroup }}" aria-label="{{ $group['label'] }}">
-                        <div data-reveal class="mb-6 border-b border-emerald-200 pb-4">
+                    <section aria-label="{{ $group['label'] }}">
+                        <div data-reveal class="mb-6 border-b border-emerald-500/30 pb-4">
                             <div>
-                                <p class="mb-1 text-xs font-bold uppercase tracking-[.2em] text-bpm-green-700">{{ $group['subtitle'] }}</p>
-                                <h3 class="text-2xl font-black text-gray-900 md:text-3xl">{{ $group['label'] }}</h3>
+                                <p class="mb-1 text-xs font-bold uppercase tracking-[.2em] text-emerald-300">{{ $group['subtitle'] }}</p>
+                                <h3 class="text-2xl font-black text-white md:text-3xl">{{ $group['label'] }}</h3>
                             </div>
                         </div>
                         @if($group['members']->isNotEmpty())
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                                 @foreach($group['members'] as $member)
-                                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 4) * 80, 240) }}ms" class="group rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl">
-                                        <div class="relative aspect-[2/3] overflow-hidden rounded-xl bg-emerald-50">
-                                            <img src="{{ $member->photo_path ? asset('uploads/profiles/'.$member->photo_path) : 'https://placehold.co/400x600/e2e8f0/064e3b?text=Foto+' . $loop->iteration }}" alt="Foto {{ $member->name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
-                                        </div>
-                                        <div class="pt-4 text-center">
-                                            <p class="mb-2 inline-block max-w-full rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">{{ $member->position }}</p>
-                                            <h4 class="text-lg font-bold text-gray-900">{{ $member->name }}</h4>
+                                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 4) * 80, 240) }}ms" class="group relative aspect-[3/4] overflow-hidden rounded-3xl border border-emerald-500/20 bg-slate-900 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-emerald-400/60 hover:shadow-[0_10px_35px_rgba(16,185,129,0.3)]">
+                                        <img src="{{ $member->photo_path ? asset('uploads/profiles/'.$member->photo_path) : 'https://placehold.co/400x600/e2e8f0/064e3b?text=Foto+' . $loop->iteration }}" alt="Foto {{ $member->name }}" loading="lazy" decoding="async" class="absolute inset-0 h-full w-full scale-100 object-cover transition-transform duration-700 ease-out group-hover:scale-110">
+                                        <div aria-hidden="true" class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                                        <div class="absolute bottom-3 left-3 right-3 z-20 rounded-2xl border border-white/10 bg-slate-900/60 p-4 backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1 group-hover:border-emerald-500/40 group-hover:bg-emerald-950/70">
+                                            <p class="mb-1.5 inline-block max-w-full rounded-full border border-emerald-500/30 bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 backdrop-blur-sm">{{ $member->position }}</p>
+                                            <h4 class="text-lg font-bold tracking-wide text-white transition-colors group-hover:text-emerald-300">{{ $member->name }}</h4>
                                         </div>
                                     </article>
                                 @endforeach
                             </div>
                         @else
-                            <p class="rounded-2xl border border-dashed border-emerald-200 bg-white/70 px-5 py-8 text-center text-gray-500">Profil {{ $group['label'] }} akan segera diperbarui.</p>
+                            <p class="rounded-2xl border border-dashed border-white/20 bg-slate-900/40 px-5 py-8 text-center text-white/65">Profil {{ $group['label'] }} akan segera diperbarui.</p>
                         @endif
                     </section>
                 @endforeach
@@ -482,31 +472,6 @@
                     items.forEach((item) => revealObserver.observe(item));
                 }
             }
-
-            const filterButtons = document.querySelectorAll('[data-member-filter]');
-            const memberSections = document.querySelectorAll('[data-member-section]');
-            filterButtons.forEach((filterButton) => {
-                filterButton.addEventListener('click', () => {
-                    const selected = filterButton.dataset.memberFilter;
-                    filterButtons.forEach((button) => {
-                        const active = button === filterButton;
-                        button.setAttribute('aria-pressed', String(active));
-                        button.classList.toggle('bg-emerald-700', active);
-                        button.classList.toggle('text-white', active);
-                        button.classList.toggle('shadow-md', active);
-                        button.classList.toggle('shadow-emerald-700/20', active);
-                        button.classList.toggle('border', !active);
-                        button.classList.toggle('border-emerald-200', !active);
-                        button.classList.toggle('bg-white', !active);
-                        button.classList.toggle('text-slate-700', !active);
-                    });
-                    memberSections.forEach((section) => {
-                        const hideSection = selected !== 'all' && section.dataset.memberSection !== selected;
-                        section.hidden = hideSection;
-                        section.classList.toggle('hidden', hideSection);
-                    });
-                });
-            });
 
             const navLinks = [...document.querySelectorAll('[data-nav-link]')];
             const navSections = ['beranda', 'profil', 'proker', 'berita', 'connect']

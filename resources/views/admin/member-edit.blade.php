@@ -26,7 +26,7 @@
             <input id="position" name="position" required maxlength="100" value="{{ old('position', $member->position) }}" class="w-full rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-3 outline-none focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100">
         </div>
         <div>
-            <label for="tier" class="mb-1.5 block text-sm font-semibold text-slate-700">Tingkatan</label>
+            <label for="tier" class="mb-1.5 block text-sm font-semibold text-slate-700">Komisi</label>
             <select id="tier" name="tier" required class="w-full rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-3 outline-none focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100">
                 @foreach(\App\Models\Member::TIERS as $tierKey => $tier)
                     <option value="{{ $tierKey }}" @selected(old('tier', $member->tier) === $tierKey)>{{ $tier['label'] }}</option>
