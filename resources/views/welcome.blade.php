@@ -117,45 +117,43 @@
         <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 z-10 h-40 bg-gradient-to-b from-emerald-950/80 via-emerald-950/30 to-transparent md:h-48"></div>
 
         <!-- Header / Navigasi -->
-        <header id="main-nav" data-reveal="from-top" class="fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between border-b border-emerald-500/20 bg-emerald-950/30 px-6 py-4 backdrop-blur-md transition-all duration-300 md:px-12 md:py-5">
-            
-            <!-- Area Kiri (Dibiarkan kosong untuk menyeimbangkan logo di kanan) -->
-            <div class="w-1/4 hidden md:block"></div>
+        <header id="main-nav" class="fixed left-1/2 top-5 z-50 flex w-[92%] max-w-5xl -translate-x-1/2 items-center justify-between rounded-full border border-white/15 bg-slate-900/70 px-4 py-3 shadow-2xl shadow-emerald-950/50 backdrop-blur-xl transition-all duration-300 md:px-6">
+            <!-- Logo dan identitas BPM FTD -->
+            <a href="#beranda" class="flex min-w-0 shrink-0 items-center gap-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400/70 focus:ring-offset-2 focus:ring-offset-slate-900">
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white p-0.5 ring-1 ring-white/30 md:h-11 md:w-11">
+                    <img src="{{ asset('images/logo-bpm-ftd.jpg') }}" alt="" class="h-full w-full rounded-full object-cover">
+                </span>
+                <span class="hidden min-w-0 leading-tight sm:block">
+                    <span class="block whitespace-nowrap text-sm font-bold tracking-wide text-white md:text-base">BPM FTD</span>
+                    <span class="block whitespace-nowrap text-[10px] font-medium tracking-wide text-emerald-300 md:text-xs">Badan Legislatif</span>
+                </span>
+            </a>
 
-            <!-- Menu di Tengah -->
-            <nav class="hidden md:flex w-2/4 justify-center">
-                <ul class="flex items-center gap-1 text-sm tracking-wide xl:gap-2">
-                    <li><a href="#beranda" data-nav-link data-nav-target="beranda" aria-current="location" class="inline-flex whitespace-nowrap rounded-xl border border-white/30 bg-white/20 px-4 py-2 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Beranda</a></li>
-                    <li><a href="#profil" data-nav-link data-nav-target="profil" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Profil</a></li>
-                    <li><a href="#proker" data-nav-link data-nav-target="proker" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Program Kerja</a></li>
-                    <li><a href="#berita" data-nav-link data-nav-target="berita" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Berita</a></li>
-                    <li><a href="#connect" data-nav-link data-nav-target="connect" class="inline-flex whitespace-nowrap rounded-xl border border-transparent px-4 py-2 font-medium text-white/90 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:bg-white/15 hover:text-white hover:shadow-lg hover:shadow-emerald-950/40 active:translate-y-0">Connect with Us</a></li>
+            <!-- Menu utama di tengah -->
+            <nav aria-label="Navigasi utama" class="hidden flex-1 justify-center lg:flex">
+                <ul class="flex items-center gap-1 text-sm xl:gap-2">
+                    <li><a href="#beranda" data-nav-link data-nav-target="beranda" aria-current="location" class="nav-island-link relative inline-flex whitespace-nowrap rounded-full border border-emerald-500/30 bg-emerald-500/20 px-4 py-1.5 font-semibold text-emerald-300 transition-all duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-full after:-translate-x-1/2 after:rounded-full after:bg-emerald-400 after:transition-all after:duration-300 hover:text-emerald-400 hover:after:w-full">Beranda</a></li>
+                    <li><a href="#profil" data-nav-link data-nav-target="profil" class="nav-island-link relative inline-flex whitespace-nowrap rounded-full border border-transparent px-4 py-1.5 font-medium text-slate-300 transition-all duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-emerald-400 after:transition-all after:duration-300 hover:text-emerald-400 hover:after:w-full">Profil</a></li>
+                    <li><a href="#proker" data-nav-link data-nav-target="proker" class="nav-island-link relative inline-flex whitespace-nowrap rounded-full border border-transparent px-4 py-1.5 font-medium text-slate-300 transition-all duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-emerald-400 after:transition-all after:duration-300 hover:text-emerald-400 hover:after:w-full">Program Kerja</a></li>
+                    <li><a href="#berita" data-nav-link data-nav-target="berita" class="nav-island-link relative inline-flex whitespace-nowrap rounded-full border border-transparent px-4 py-1.5 font-medium text-slate-300 transition-all duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-emerald-400 after:transition-all after:duration-300 hover:text-emerald-400 hover:after:w-full">Berita</a></li>
+                    <li><a href="#connect" data-nav-link data-nav-target="connect" class="nav-island-link relative inline-flex whitespace-nowrap rounded-full border border-transparent px-4 py-1.5 font-medium text-slate-300 transition-all duration-300 after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-emerald-400 after:transition-all after:duration-300 hover:text-emerald-400 hover:after:w-full">Connect with Us</a></li>
                 </ul>
             </nav>
 
-            <!-- Logo di Kanan Atas -->
-            <div class="w-full md:w-1/4 flex justify-end items-center">
-                <div class="flex items-center gap-4">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-white font-bold text-sm tracking-wider uppercase">BPM FTD</p>
-                        <p class="text-green-200 text-xs opacity-80">Badan Legislatif</p>
-                    </div>
-                    <div class="h-14 w-14 shrink-0 overflow-hidden rounded-full bg-white p-1 shadow-lg ring-1 ring-white/50 transition-transform duration-300 hover:scale-[1.04] md:h-[4.5rem] md:w-[4.5rem]">
-                        <img src="{{ asset('images/logo-bpm-ftd.jpg') }}" alt="Logo Badan Perwakilan Mahasiswa Fakultas Teknologi dan Desain" class="block h-full w-full rounded-full object-cover">
-                    </div>
-                </div>
+            <!-- Aksi cepat dan navigasi mobile -->
+            <div class="flex shrink-0 items-center gap-2">
+                <a href="#suggestion-widget" data-open-suggestion class="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3 py-2 text-xs font-semibold text-white shadow-md shadow-emerald-600/30 transition-all hover:-translate-y-0.5 hover:bg-emerald-500 sm:px-4" aria-label="Buka Kotak Saran">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h8M8 14h5m-8 6 2.5-3H18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12z"/></svg>
+                    <span class="hidden sm:inline">Kotak Saran</span>
+                </a>
+                <button id="mobile-menu-btn" aria-controls="mobile-menu" aria-expanded="false" aria-label="Buka menu navigasi" class="inline-flex h-9 w-9 items-center justify-center rounded-full text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400/70 lg:hidden">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
             </div>
-
-            <!-- Mobile Menu Button (Hamburger) -->
-            <button id="mobile-menu-btn" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden text-white focus:outline-none absolute left-6">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
         </header>
 
         <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" aria-hidden="true" class="hidden md:hidden fixed left-6 right-6 top-20 z-40 rounded-xl border border-emerald-400/20 bg-emerald-950/95 p-4 shadow-2xl backdrop-blur-md">
+        <div id="mobile-menu" aria-hidden="true" class="hidden lg:hidden fixed left-1/2 top-[5.5rem] z-40 w-[92%] max-w-md -translate-x-1/2 rounded-3xl border border-emerald-400/20 bg-emerald-950/95 p-4 shadow-2xl backdrop-blur-md">
             <ul class="flex flex-col space-y-4 text-white text-center font-medium">
                 <li><a href="#beranda" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Beranda</a></li>
                 <li><a href="#profil" class="block rounded py-2 transition-colors hover:bg-emerald-500/20 hover:text-emerald-100">Profil</a></li>
@@ -510,18 +508,6 @@
                 });
             });
 
-            const navbar = document.getElementById('main-nav');
-            const syncNavbar = () => {
-                const scrolled = window.scrollY > 24;
-                navbar?.classList.toggle('bg-emerald-950/40', scrolled);
-                navbar?.classList.toggle('bg-emerald-950/30', !scrolled);
-                navbar?.classList.toggle('border-emerald-500/20', scrolled);
-                navbar?.classList.toggle('border-emerald-500/15', !scrolled);
-                navbar?.classList.toggle('shadow-lg', scrolled);
-            };
-            syncNavbar();
-            window.addEventListener('scroll', syncNavbar, { passive: true });
-
             const navLinks = [...document.querySelectorAll('[data-nav-link]')];
             const navSections = ['beranda', 'profil', 'proker', 'berita', 'connect']
                 .map((id) => document.getElementById(id))
@@ -529,12 +515,14 @@
             const setActiveNav = (target) => {
                 navLinks.forEach((link) => {
                     const active = link.dataset.navTarget === target;
-                    link.classList.toggle('bg-white/20', active);
-                    link.classList.toggle('border-white/30', active);
-                    link.classList.toggle('text-white', active);
+                    link.classList.toggle('bg-emerald-500/20', active);
+                    link.classList.toggle('border-emerald-500/30', active);
+                    link.classList.toggle('border-transparent', !active);
+                    link.classList.toggle('text-emerald-300', active);
                     link.classList.toggle('font-semibold', active);
-                    link.classList.toggle('text-white/90', !active);
+                    link.classList.toggle('text-slate-300', !active);
                     link.classList.toggle('font-medium', !active);
+                    link.classList.toggle('after:w-full', active);
                     if (active) link.setAttribute('aria-current', 'location');
                     else link.removeAttribute('aria-current');
                 });
@@ -547,6 +535,14 @@
             updateActiveNav();
             window.addEventListener('scroll', updateActiveNav, { passive: true });
             window.addEventListener('hashchange', updateActiveNav);
+
+            document.querySelector('[data-open-suggestion]')?.addEventListener('click', (event) => {
+                event.preventDefault();
+                const widget = document.getElementById('suggestion-widget');
+                if (!widget) return;
+                widget.open = true;
+                window.requestAnimationFrame(() => document.getElementById('suggestion-message')?.focus({ preventScroll: true }));
+            });
 
             const button = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
