@@ -99,6 +99,13 @@
             transition: max-height 360ms cubic-bezier(.2, .7, .2, 1), opacity 240ms ease, transform 360ms cubic-bezier(.2, .7, .2, 1);
         }
         #mobile-menu.is-open { max-height: 24rem; opacity: 1; transform: translate3d(0, 0, 0); pointer-events: auto; }
+        .suggestion-trigger {
+            box-shadow: 0 10px 28px rgba(6, 78, 59, .3), 0 0 22px rgba(16, 185, 129, .22);
+            transition: transform 280ms ease, box-shadow 320ms ease, background-color 280ms ease;
+        }
+        .suggestion-trigger:hover, .suggestion-trigger:focus-visible {
+            box-shadow: 0 14px 36px rgba(6, 78, 59, .4), 0 0 30px rgba(16, 185, 129, .34);
+        }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
             .scroll-cue { animation: none !important; }
@@ -254,13 +261,13 @@
                         @if($group['members']->isNotEmpty())
                             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                                 @foreach($group['members'] as $member)
-                                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 4) * 80, 240) }}ms" class="group overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-md shadow-emerald-950/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl">
+                                    <article data-reveal style="--reveal-delay: {{ min(($loop->index % 4) * 80, 240) }}ms" class="group overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-md shadow-emerald-900/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg hover:shadow-emerald-900/10">
                                         <div class="relative aspect-[2/3] overflow-hidden bg-emerald-50">
                                             <img src="{{ $member->photo_path ? asset('uploads/profiles/'.$member->photo_path) : 'https://placehold.co/400x600/e2e8f0/064e3b?text=Foto+' . $loop->iteration }}" alt="Foto {{ $member->name }}" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]">
                                         </div>
                                         <div class="p-5 text-center">
-                                            <h4 class="mb-1 text-lg font-bold text-gray-900">{{ $member->name }}</h4>
-                                            <p class="text-sm font-semibold text-bpm-green-700">{{ $member->position }}</p>
+                                            <p class="mb-2 inline-flex max-w-full items-center rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-bpm-green-800">{{ $member->position }}</p>
+                                            <h4 class="text-lg font-bold text-gray-900">{{ $member->name }}</h4>
                                         </div>
                                     </article>
                                 @endforeach
@@ -442,7 +449,7 @@
                 <p id="suggestion-status" class="min-h-5 text-center text-xs leading-relaxed text-gray-500" role="status" aria-live="polite"></p>
             </form>
         </div>
-        <summary class="flex cursor-pointer list-none items-center gap-3 rounded-full bg-bpm-green-800 py-3 pl-4 pr-5 text-white shadow-xl shadow-emerald-950/30 transition hover:-translate-y-1 hover:bg-bpm-green-900 focus:outline-none focus:ring-4 focus:ring-emerald-300 [&::-webkit-details-marker]:hidden">
+        <summary class="suggestion-trigger flex cursor-pointer list-none items-center gap-3 rounded-full bg-bpm-green-800 py-3 pl-4 pr-5 text-white transition hover:-translate-y-1 hover:bg-bpm-green-900 focus:outline-none focus:ring-4 focus:ring-emerald-300 [&::-webkit-details-marker]:hidden">
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 10h8M8 14h5m-8 6 2.5-3H18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12z"/></svg>
             </span>
