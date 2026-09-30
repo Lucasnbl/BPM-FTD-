@@ -1,11 +1,9 @@
 <?php
 
-require __DIR__ . '/../public/index.php';<?php
-
-// Forward request to the public/index.php
+// Arahkan request ke public/index.php
 $_SERVER['SCRIPT_NAME'] = '/index.php';
 
-// Menyiapkan folder /tmp untuk runtime Vercel
+// Konfigurasi direktori sementara (/tmp) khusus Vercel Serverless
 $tmpDir = '/tmp';
 putenv("APP_CONFIG_CACHE={$tmpDir}/config.php");
 putenv("APP_SERVICES_CACHE={$tmpDir}/services.php");
