@@ -1,9 +1,9 @@
 <?php
 
-// Arahkan request ke public/index.php
+// Forward request ke public/index.php
 $_SERVER['SCRIPT_NAME'] = '/index.php';
 
-// Konfigurasi direktori sementara (/tmp) khusus Vercel Serverless
+// Direktori sementara untuk cache & compiled views di Vercel
 $tmpDir = '/tmp';
 putenv("APP_CONFIG_CACHE={$tmpDir}/config.php");
 putenv("APP_SERVICES_CACHE={$tmpDir}/services.php");
